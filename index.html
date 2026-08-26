@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Lingua Mundi — Japanese language tools</title>
+		<meta
+			name="description"
+			content="Shikibu, the EPUB editor for Japanese, and the Lingua Mundi dictionary API."
+		/>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<header class="topbar">
+			<span class="brand">Lingua Mundi</span>
+			<nav>
+				<a href="#products">Products</a>
+				<a href="#contact">Contact</a>
+			</nav>
+		</header>
+
+		<section class="hero">
+			<h1>Japanese language tools, built on real dictionary data</h1>
+			<p>
+				Two products, one engine: <strong>Shikibu</strong>, the EPUB editor for
+				reading and annotating Japanese books, and the <strong>Lingua Mundi</strong>
+				API, a dictionary and linguistic-data service backed by JMdict, WordNet,
+				KANJIDIC2, and J-UniMorph.
+			</p>
+			<div class="hero-actions">
+				<a class="btn btn-primary" href="#products">See the products</a>
+			</div>
+		</section>
+
+		<main id="products" class="products">
+			<article class="card">
+				<h2>Shikibu</h2>
+				<p class="tag">Desktop EPUB editor · macOS / Windows / Linux</p>
+				<p>
+					Open a Japanese EPUB, add furigana with one click, annotate vocabulary
+					and grammar, run linguistic search across the whole book, and export a
+					clean, spec-compliant EPUB. Pro includes a full offline dictionary
+					powered by the Lingua Mundi database.
+				</p>
+				<div class="card-actions">
+					<a class="btn btn-primary" href="#" id="shikibu-download">Download Shikibu</a>
+				</div>
+			</article>
+
+			<article class="card">
+				<h2>Lingua Mundi API</h2>
+				<p class="tag">Dictionary &amp; linguistic data as a service</p>
+				<p>
+					Look up words, get furigana, deinflections, senses, kanji data, and
+					inflection paradigms through a simple HTTP API. Free tier and a $9/mo
+					Pro plan with API keys for your own applications.
+				</p>
+				<div class="card-actions">
+					<a class="btn btn-primary" href="#" id="api-dashboard">Open the dashboard</a>
+				</div>
+			</article>
+		</main>
+
+		<section id="contact" class="contact">
+			<h2>Contact</h2>
+			<p>Questions or feedback: <a href="mailto:rhls.softdev@gmail.com">rhls.softdev@gmail.com</a></p>
+		</section>
+
+		<footer>
+			<p>© 2026 Lingua Mundi · <a href="mailto:rhls.softdev@gmail.com">rhls.softdev@gmail.com</a></p>
+		</footer>
+
+		<script>
+			// Live tunnel URLs (demo): the hosted dashboard and the Shikibu
+			// download point. Replace with real production URLs when hosted.
+			const SHIKIBU_URL = "https://foreign-flashers-celebration-north.trycloudflare.com";
+			const API_DASHBOARD_URL = "https://professionals-unique-cindy-passengers.trycloudflare.com";
+			document.getElementById("shikibu-download").href = SHIKIBU_URL;
+			document.getElementById("api-dashboard").href = API_DASHBOARD_URL;
+		</script>
+	</body>
+</html>
