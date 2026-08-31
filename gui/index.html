@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Lingua Mundi — Dictionary</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">言</span>
+      <div class="brand-text">
+        <h1>Lingua Mundi</h1>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <div class="lang-toggle" role="group" aria-label="Dictionary language">
+        <button id="lang-jpn" class="lang-btn active" type="button" aria-pressed="true" aria-label="日本語 → English">日本語</button>
+        <button id="lang-eng" class="lang-btn" type="button" aria-pressed="false" aria-label="English → Japanese">EN</button>
+      </div>
+      <button id="help-btn" class="icon-btn" type="button" aria-label="How to use this dictionary" title="How to use this dictionary">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9a2.5 2.5 0 1 1 3.4 2.3c-.8.3-1.4 1-1.4 1.9v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.1" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- How-to panel (opened via the ? button; plain-language, no jargon) -->
+<div id="help-panel" class="help-panel" hidden role="dialog" aria-label="How to use the Lingua Mundi dictionary">
+  <div class="help-inner">
+    <button id="help-close" class="icon-btn" type="button" aria-label="Close help">✕</button>
+    <h2>How to use this dictionary</h2>
+    <ol class="help-steps">
+      <li>Type a word — Japanese or English — in the search box.</li>
+      <li>Results appear as you type; press <kbd>Enter</kbd> or tap a suggestion to open it.</li>
+      <li>You'll see the word's readings, meanings, kanji details, and related forms.</li>
+      <li>Switch the language button (日本語 / EN) to search in the other direction.</li>
+      <li>Tap ✕ to clear the search and start again.</li>
+    </ol>
+    <p class="help-note">Everything is looked up in the Lingua Mundi database — every entry traces to a named source (JMdict, KANJIDIC2, WordNet, J-UniMorph). No guesses.</p>
+  </div>
+</div>
+
+<main class="app">
+
+  <!-- Search -->
+  <section class="search-zone" aria-label="Search">
+    <div class="searchbox-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input
+        id="search"
+        type="search"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Type a word — 猫, 食べる, cat…"
+        aria-label="Search the dictionary"
+        aria-autocomplete="list"
+        aria-controls="suggestions"
+        aria-expanded="false"
+      >
+      <button id="clear-btn" class="icon-btn" type="button" aria-label="Clear search" hidden>✕</button>
+    </div>
+
+    <!-- Typeahead suggestions -->
+    <ul id="suggestions" class="suggestions" role="listbox" hidden></ul>
+
+    <!-- Status banner -->
+    <div id="status" class="status" role="status" hidden></div>
+  </section>
+
+  <!-- Word detail -->
+  <section id="detail" class="detail" hidden aria-live="polite"></section>
+
+  <!-- Empty / idle state -->
+  <section id="idle" class="idle">
+    <div class="idle-card">
+      <p class="idle-glyph">🔎</p>
+      <h2>Search the dictionary</h2>
+      <p>Type a lemma or an inflected surface form — e.g. <button class="chip-btn" data-example="食べる">食べる</button>
+      <button class="chip-btn" data-example="猫">猫</button>
+      <button class="chip-btn" data-example="食べません">食べません</button>
+      <button class="chip-btn" data-example="cat">cat</button></p>
+      <p class="idle-hint">Results appear as you type. <kbd>↑</kbd><kbd>↓</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Lingua Mundi prototype · live mode uses <code id="api-base-label">http://localhost:8765</code> · falls back to bundled sample data offline</p>
+</footer>
+
+<script src="offline-db.js"></script>
+<script>
+"use strict";
+
+/* =====================================================================
+ * Configuration — point this at the running Lingua Mundi API.
+ * Overrides, in order: ?api=<url> query param → localStorage("lm-api")
+ * → the API_BASE constant below. The API must send CORS headers (or be
+ * served from the same origin) for browser fetches to succeed; otherwise
+ * the UI automatically falls back to the bundled sample data below so it
+ * stays demonstrable.
+ * =================================================================== */
+const API_BASE_DEFAULT = "http://localhost:8765";  // <-- set your API root here
+const API_BASE = (new URLSearchParams(location.search).get("api")
+  || localStorage.getItem("lm-api")
+  || API_BASE_DEFAULT).replace(/\/+$/, "");
+const API_LIVE = true;                             // set false to force sample data
+const DEBOUNCE_MS = 250;
+const FETCH_TIMEOUT_MS = 6000;
+
+/* ---------------------------------------------------------------------
+ * Bundled sample data — mirrors the real /analyze response shape
+ * (schemas/analyze.py in lingua-mundi). Real responses captured from
+ * the live API on 2026-08-29.
+ * ------------------------------------------------------------------- */
+const SAMPLE_DATA = [
+  {
+    queried_text: "猫", language: "jpn", lemma: "猫", part_of_speech: "n",
+    furigana: "ねこ", inflected_from: null,
+    readings: [
+      { text: "ビョウ", reading_type: "on-yomi", is_common: null },
+      { text: "ねこ", reading_type: "kun-yomi", is_common: null },
+      { text: "ねこ", reading_type: "kana", is_common: true },
+      { text: "猫", reading_type: "kanji", is_common: false }
+    ],
+    senses: [
+      { definition: "cat (esp. the domestic cat, Felis catus); feline", definition_language: "eng", part_of_speech: [], field: [], misc: [], concept: null },
+      { definition: "shamisen", definition_language: "eng", part_of_speech: [], field: [], misc: [], concept: null },
+      { definition: "geisha", definition_language: "eng", part_of_speech: [], field: [], misc: [], concept: null },
+      { definition: "bottom (submissive partner of a homosexual relationship)", definition_language: "eng", part_of_speech: [], field: [], misc: [], concept: null },
+      { definition: "通常、厚く柔らかい毛皮を持ち、吠えることのできないネコ科の哺乳類：家ネコ; ヤマネコ", definition_language: "jpn", part_of_speech: ["n"], field: [], misc: [], concept: { label: "(unlabeled synset 02121620-n)", uri: "princeton-wordnet:02121620-n", domain: null } }
+    ],
+    inflected_forms: [],
+    kanji_detail: { stroke_count: 11, grade: 8, freq: 1702, jlpt: 2 },
+    sources: ["JMdict", "KANJIDIC2", "Princeton WordNet"]
+  },
+  {
+    queried_text: "食べる", language: "jpn", lemma: "食べる", part_of_speech: "v",
+    furigana: "たべる", inflected_from: null,
+    readings: [
+      { text: "食べる", reading_type: "kanji", is_common: true },
+      { text: "喫べる", reading_type: "kanji", is_common: false },
+      { text: "たべる", reading_type: "kana", is_common: true }
+    ],
+    senses: [
+      { definition: "to eat", definition_language: "eng", part_of_speech: [], field: [], misc: [], concept: null },
+      { definition: "to live on (e.g. a salary); to live off; to subsist on", definition_language: "eng", part_of_speech: [], field: [], misc: [], concept: null },
+      { definition: "食事を食べる; ご飯を食べる", definition_language: "jpn", part_of_speech: [], field: [], misc: [], concept: { label: "(unlabeled synset 01166351-v)", uri: "princeton-wordnet:01166351-v", domain: null } }
+    ],
+    inflected_forms: [
+      { surface_form: "食べません", features: ["V", "PRS", "IPFV", "POL", "FOREG", "NEG"], hits: 4970000 },
+      { surface_form: "食べた", features: ["V", "PST", "PFV"], hits: 12000000 }
+    ],
+    kanji_detail: null,
+    sources: ["JMdict", "Princeton WordNet", "J-UniMorph"]
+  },
+  {
+    queried_text: "cat", language: "eng", lemma: "cat", part_of_speech: null,
+    furigana: null, inflected_from: null,
+    readings: [],
+    senses: [
+      { definition: "『猫』;(ライオン,トラ,ヒョウなどの)ネコ科の動物", definition_language: "jpn", part_of_speech: [], field: [], misc: [], concept: null }
+    ],
+    inflected_forms: [],
+    kanji_detail: null,
+    sources: ["JMdict"]
+  }
+];
+
+/* ---------------------------- DOM refs ----------------------------- */
+const $ = (id) => document.getElementById(id);
+const searchInput = $("search");
+const suggestionsEl = $("suggestions");
+const statusEl = $("status");
+const detailEl = $("detail");
+const idleEl = $("idle");
+const clearBtn = $("clear-btn");
+const langSelect = $("lang");
+const langJpnBtn = $("lang-jpn");
+const langEngBtn = $("lang-eng");
+const helpBtn = $("help-btn");
+const helpPanel = $("help-panel");
+const helpClose = $("help-close");
+const apiBaseLabel = $("api-base-label");
+
+let suggestions = [];          // current suggestion items
+let activeIndex = -1;          // highlighted suggestion
+let sampleMode = false;        // true once live API failed
+let offlineMode = false;       // true once offline DB answered
+let currentLang = "jpn";       // active dictionary direction
+
+apiBaseLabel.textContent = API_BASE;
+
+/* --------------------------- utilities ----------------------------- */
+function debounce(fn, ms) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[c]);
+}
+
+async function fetchWithTimeout(url, ms) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { signal: ctrl.signal });
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+function setStatus(text, kind) {
+  statusEl.textContent = text;
+  statusEl.className = "status " + (kind || "");
+  statusEl.hidden = !text;
+}
+
+/* ------------------------- live API lookup ------------------------- */
+async function liveAnalyze(query, language) {
+  const url = `${API_BASE}/analyze?text=${encodeURIComponent(query)}&language=${encodeURIComponent(language)}`;
+  const res = await fetchWithTimeout(url, FETCH_TIMEOUT_MS);
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  const data = await res.json();
+  return data; // AnalyzeResult | null
+}
+
+/* ------------------------- language switching ---------------------- */
+function setLanguage(lang) {
+  currentLang = lang;
+  langJpnBtn.classList.toggle("active", lang === "jpn");
+  langJpnBtn.setAttribute("aria-pressed", lang === "jpn" ? "true" : "false");
+  langEngBtn.classList.toggle("active", lang === "eng");
+  langEngBtn.setAttribute("aria-pressed", lang === "eng" ? "true" : "false");
+  if (searchInput.value.trim()) doLookup(searchInput.value);
+}
+langJpnBtn.addEventListener("click", () => setLanguage("jpn"));
+langEngBtn.addEventListener("click", () => setLanguage("eng"));
+
+/* ----------------------------- help panel -------------------------- */
+helpBtn.addEventListener("click", () => { helpPanel.hidden = !helpPanel.hidden; });
+helpClose.addEventListener("click", () => { helpPanel.hidden = true; });
+helpPanel.addEventListener("click", (e) => { if (e.target === helpPanel) helpPanel.hidden = true; });
+
+/* ------------------------ sample-data lookup ----------------------- */
+function sampleAnalyze(query, language) {
+  const q = query.trim().toLowerCase();
+  if (!q) return [];
+  return SAMPLE_DATA.filter((d) => {
+    if (d.language !== language) return false;
+    const hay = [
+      d.lemma, d.furigana || "",
+      ...(d.readings || []).map((r) => r.text),
+      ...(d.senses || []).map((s) => s.definition || "")
+    ].join(" ").toLowerCase();
+    return hay.includes(q);
+  });
+}
+
+/* ------------------------- suggestion items ------------------------ */
+function entryToSuggestion(entry) {
+  return {
+    lemma: entry.lemma,
+    furigana: entry.furigana,
+    pos: entry.part_of_speech,
+    firstSense: (entry.senses && entry.senses[0] && entry.senses[0].definition) || "",
+    entry
+  };
+}
+
+/* ------------------------ typeahead rendering ---------------------- */
+function renderSuggestions() {
+  suggestionsEl.innerHTML = "";
+  if (!suggestions.length) {
+    suggestionsEl.hidden = true;
+    searchInput.setAttribute("aria-expanded", "false");
+    return;
+  }
+  suggestions.forEach((s, i) => {
+    const li = document.createElement("li");
+    li.className = "suggestion" + (i === activeIndex ? " active" : "");
+    li.setAttribute("role", "option");
+    li.setAttribute("aria-selected", i === activeIndex ? "true" : "false");
+    li.innerHTML =
+      `<span class="sug-lemma">${escapeHtml(s.lemma)}</span>` +
+      (s.furigana ? `<span class="sug-furigana">${escapeHtml(s.furigana)}</span>` : "") +
+      (s.pos ? `<span class="sug-pos">${escapeHtml(s.pos)}</span>` : "") +
+      `<span class="sug-sense">${escapeHtml(s.firstSense)}</span>`;
+    li.addEventListener("mousedown", (e) => { e.preventDefault(); openEntry(s.entry); });
+    li.addEventListener("mouseenter", () => { setActive(i); });
+    suggestionsEl.appendChild(li);
+  });
+  suggestionsEl.hidden = false;
+  searchInput.setAttribute("aria-expanded", "true");
+}
+
+function setActive(i) {
+  activeIndex = i;
+  const items = suggestionsEl.children;
+  for (let k = 0; k < items.length; k++) {
+    items[k].classList.toggle("active", k === i);
+    items[k].setAttribute("aria-selected", k === i ? "true" : "false");
+  }
+}
+
+/* ------------------------- the main lookup ------------------------- */
+async function doLookup(query) {
+  const language = currentLang;
+  const trimmed = query.trim();
+  if (!trimmed) { closeSuggestions(); return; }
+
+  // 1. Live API (when enabled and reachable)
+  if (API_LIVE) {
+    try {
+      const entry = await liveAnalyze(trimmed, language);
+      if (offlineMode || sampleMode) { offlineMode = false; sampleMode = false; setStatus(null); }
+      if (entry) return showEntry(entry, trimmed);
+      suggestions = [];
+      renderSuggestions();
+      setStatus(`No entry for “${trimmed}” in this dictionary — try the lemma form.`, "warn");
+      return;
+    } catch (err) {
+      // fall through to offline DB / samples
+    }
+  }
+
+  // 2. Bundled offline database (sql.js — present in release builds/APK)
+  if (offlineReady) {
+    const entry = offlineLookup(trimmed, language);
+    if (entry) {
+      if (!offlineMode) { offlineMode = true; sampleMode = false; setStatus("Offline database mode", "offline"); }
+      return showEntry(entry, trimmed);
+    }
+    suggestions = [];
+    renderSuggestions();
+    setStatus(`No entry for “${trimmed}” in the offline dictionary — try the lemma form.`, "warn");
+    return;
+  }
+
+  // 3. Bundled sample data (last resort, always demonstrable)
+  if (!sampleMode) {
+    sampleMode = true;
+    setStatus(API_LIVE ? "API not reachable — showing bundled sample data" : "Showing bundled sample data", "offline");
+  }
+  suggestions = sampleAnalyze(trimmed, language).map(entryToSuggestion);
+  if (!suggestions.length) {
+    renderSuggestions();
+    setStatus(`No sample entry for “${trimmed}” — try 猫, 食べる or cat.`, "warn");
+    return;
+  }
+  setActive(0);
+  renderSuggestions();
+}
+
+function showEntry(entry, queriedText) {
+  suggestions = [entryToSuggestion(entry)];
+  if ((entry.lemma || "") !== queriedText) openEntry(entry); // exact hit → show directly
+  setActive(0);
+  renderSuggestions();
+}
+
+const debouncedLookup = debounce((q) => doLookup(q), DEBOUNCE_MS);
+
+function closeSuggestions() {
+  suggestions = [];
+  activeIndex = -1;
+  renderSuggestions();
+}
+
+/* --------------------------- detail panel -------------------------- */
+function rubyFor(lemma, furigana) {
+  if (!furigana) return escapeHtml(lemma);
+  const L = [...lemma];
+  const F = [...furigana];
+  if (L.length === F.length) {
+    return L.map((ch, i) => (ch === F[i]
+      ? escapeHtml(ch)
+      : `<ruby>${escapeHtml(ch)}<rt>${escapeHtml(F[i])}</rt></ruby>`)).join("");
+  }
+  return `${escapeHtml(lemma)} <span class="kana-alt">${escapeHtml(furigana)}</span>`;
+}
+
+function posLabel(pos) {
+  const map = { n: "noun", v: "verb", adj: "adjective", adv: "adverb", aux: "auxiliary", "v1": "verb (ichidan)", "v5": "verb (godan)", "pn": "pronoun", "exp": "expression" };
+  return map[pos] || pos || "—";
+}
+
+function openEntry(entry) {
+  idleEl.hidden = true;
+  detailEl.hidden = false;
+  closeSuggestions();
+
+  const inflected = entry.inflected_from
+    ? `<p class="inflected-note">Inflected form of
+        <strong>${escapeHtml(entry.inflected_from.base_lemma)}</strong>
+        <span class="feat">${escapeHtml((entry.inflected_from.features || []).join(" · "))}</span></p>`
+    : "";
+
+  const senses = (entry.senses || []).map((s, i) => `
+    <li class="sense">
+      <span class="sense-num">${i + 1}</span>
+      <div class="sense-body">
+        <p class="sense-def">${escapeHtml(s.definition || "")}</p>
+        ${(s.part_of_speech && s.part_of_speech.length) ? `<p class="sense-pos">${escapeHtml(s.part_of_speech.join(", "))}</p>` : ""}
+        ${s.concept ? `<p class="sense-concept">${escapeHtml(s.concept.label || "")}${s.concept.uri ? ` · <span class="mono">${escapeHtml(s.concept.uri)}</span>` : ""}</p>` : ""}
+      </div>
+    </li>`).join("");
+
+  const readings = (entry.readings || []).map((r) => `
+    <span class="reading">
+      <span class="reading-text">${escapeHtml(r.text)}</span>
+      <span class="reading-type">${escapeHtml(r.reading_type)}</span>
+      ${r.is_common ? `<span class="star" title="common">★</span>` : ""}
+    </span>`).join("");
+
+  const inflections = (entry.inflected_forms || []).map((f) => `
+    <span class="inflection">${escapeHtml(f.surface_form)}
+      <span class="feat">${escapeHtml((f.features || []).join(" · "))}</span></span>`).join("");
+
+  const kanji = entry.kanji_detail ? `
+    <section class="card kanji-card">
+      <h3>Kanji breakdown</h3>
+      <div class="kanji-grid">
+        <div class="kanji-cell"><span class="kanji-char">${escapeHtml(entry.lemma[0] || "—")}</span></div>
+        <dl class="kanji-stats">
+          <div><dt>Strokes</dt><dd>${entry.kanji_detail.stroke_count ?? "—"}</dd></div>
+          <div><dt>Grade</dt><dd>${entry.kanji_detail.grade ?? "—"}</dd></div>
+          <div><dt>JLPT</dt><dd>${entry.kanji_detail.jlpt ?? "—"}</dd></div>
+          <div><dt>Frequency rank</dt><dd>${entry.kanji_detail.freq ?? "—"}</dd></div>
+        </dl>
+      </div>
+    </section>` : "";
+
+  const sources = (entry.sources || []).map((s) => `<span class="source">${escapeHtml(s)}</span>`).join("");
+
+  detailEl.innerHTML = `
+    <article class="word-card">
+      <header class="word-header">
+        <h2 class="lemma">${rubyFor(entry.lemma, entry.furigana)}</h2>
+        <p class="word-meta">
+          <span class="pos">${posLabel(entry.part_of_speech)}</span>
+          <span class="lang-tag">${escapeHtml(entry.language)}</span>
+        </p>
+      </header>
+      ${inflected}
+      <section class="card">
+        <h3>Senses</h3>
+        <ol class="senses">${senses || "<li class='sense'><div class='sense-body'><p class='sense-def'>No senses stored for this entry.</p></div></li>"}</ol>
+      </section>
+      ${readings ? `<section class="card"><h3>Readings</h3><div class="readings">${readings}</div></section>` : ""}
+      ${inflections ? `<section class="card"><h3>Related forms</h3><div class="inflections">${inflections}</div></section>` : ""}
+      ${kanji}
+      ${sources ? `<section class="card sources-card"><h3>Sources</h3><div class="sources">${sources}</div></section>` : ""}
+      <footer class="word-footer">
+        <button id="new-search" class="btn-secondary" type="button">← New search</button>
+      </footer>
+    </article>`;
+
+  $("new-search").addEventListener("click", () => {
+    detailEl.hidden = true;
+    idleEl.hidden = false;
+    searchInput.value = "";
+    searchInput.focus();
+  });
+
+  detailEl.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/* --------------------------- keyboard nav -------------------------- */
+searchInput.addEventListener("input", (e) => {
+  const q = e.target.value;
+  clearBtn.hidden = !q;
+  if (q.trim()) {
+    debouncedLookup(q);
+  } else {
+    closeSuggestions();
+    setStatus(null);
+    detailEl.hidden = true;
+    idleEl.hidden = false;
+  }
+});
+
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    if (!suggestions.length) return;
+    setActive((activeIndex + 1) % suggestions.length);
+  } else if (e.key === "ArrowUp") {
+    e.preventDefault();
+    if (!suggestions.length) return;
+    setActive((activeIndex - 1 + suggestions.length) % suggestions.length);
+  } else if (e.key === "Enter") {
+    e.preventDefault();
+    const pick = suggestions[activeIndex >= 0 ? activeIndex : 0];
+    if (pick) openEntry(pick.entry);
+  } else if (e.key === "Escape") {
+    closeSuggestions();
+    searchInput.blur();
+  }
+});
+
+clearBtn.addEventListener("click", () => {
+  searchInput.value = "";
+  clearBtn.hidden = true;
+  closeSuggestions();
+  setStatus(null);
+  detailEl.hidden = true;
+  idleEl.hidden = false;
+  searchInput.focus();
+});
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-zone")) closeSuggestions();
+});
+
+/* example chips on the idle screen */
+document.querySelectorAll("[data-example]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    searchInput.value = btn.dataset.example;
+    clearBtn.hidden = false;
+    doLookup(btn.dataset.example);
+  });
+});
+
+/* initial focus */
+searchInput.focus();
+
+/* try to load the bundled offline dictionary in the background */
+initOfflineDb().then((ok) => {
+  if (ok) setStatus("Offline database loaded — lookups work without a connection", "offline");
+});
+</script>
+</body>
+</html>

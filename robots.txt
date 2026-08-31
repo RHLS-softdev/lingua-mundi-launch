@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rhls-softdev.github.io/lingua-mundi-launch/sitemap.xml
