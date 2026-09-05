@@ -36,13 +36,20 @@
 	</head>
 	<body>
 		<header class="topbar">
-			<img src="rhls-logo-sm.png" alt="RHLS" class="topbar-logo" />
-			<span class="brand">Lingua Mundi</span>
-			<nav>
-				<a href="#products" data-i18n="lm.nav.products">Products</a>
-				<a href="#contact" data-i18n="lm.nav.contact">Contact</a>
-							<a href="https://rhls-softdev.github.io/">All RHLS apps</a>
-			</nav>
+			<a class="brand-lockup" href="index.html">
+				<img src="rhls-logo-sm.png" alt="RHLS" class="topbar-logo" />
+				<span class="brand">Lingua Mundi</span>
+			</a>
+			<div class="topbar-end">
+				<nav>
+					<a href="#products" data-i18n="lm.nav.products">Products</a>
+					<a href="#contact" data-i18n="lm.nav.contact">Contact</a>
+				</nav>
+				<div class="lang-bar">
+					<label for="lang-select">🌐</label>
+					<select id="lang-select" aria-label="Language"></select>
+				</div>
+			</div>
 		</header>
 
 		<section class="hero">
@@ -120,10 +127,6 @@
 			document.getElementById("shikibu-download").href = SHIKIBU_URL;
 			document.getElementById("api-dashboard").href = API_DASHBOARD_URL;
 		</script>
-		<div class="lang-bar">
-			<label for="lang-select">🌐</label>
-			<select id="lang-select" aria-label="Language"></select>
-		</div>
 		<script src="localize/i18n-site.js"></script>
 		<script>
 			var switcher = document.getElementById("lang-select");
