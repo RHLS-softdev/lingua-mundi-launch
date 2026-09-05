@@ -1,0 +1,22 @@
+{
+  "brand.sub": "Dictionnaire hors ligne · six langues · un lexique",
+  "ui.language": "Langue",
+  "api.mode": "API Lingua Mundi",
+  "search.aria": "Rechercher dans le lexique",
+  "search.placeholder": "Rechercher dans le lexique…",
+  "search.hint": "Tapez pour chercher — ↑/↓ pour naviguer, Entrée pour ouvrir, Échap pour fermer.",
+  "detail.empty": "Choisissez une langue, puis cherchez ou touchez un mot.",
+  "senses.title": "Sens",
+  "tier.free": "Niveau gratuit : lexique inclus ({n} mots)",
+  "tier.plus": "Plus : couche grammaticale UD complète (verrouillée dans la démo)",
+  "footer.note": "Version démo : le JSON fourni remplace le SQLite par langue. Le niveau Plus (couche grammaticale UD complète) est simulé et verrouillé.",
+  "plus.locked": "🔒 Plus — couche grammaticale UD (verrouillée dans la démo)",
+  "plus.title": "Contenu du niveau Plus (simulé)",
+  "plus.body1": "Cette entrée porte des données grammaticales UD absentes du niveau gratuit : upos {upos} de {source}",
+  "plus.body2": "Free (29 $ à vie) inclut les dictionnaires essentiels. Plus (9 $/mois) déverrouille toute la couche UD via lookupUd() — verrouillée dans cette démo.",
+  "api.lookup": "Chercher via l'API Lingua Mundi",
+  "api.none": "Aucun résultat de l'API Lingua Mundi.",
+  "api.error": "API Lingua Mundi injoignable ({base}). Vérifiez qu'elle tourne ou désactivez le mode API.",
+  "typeahead.aria": "Résultats de recherche",
+  "tabs.aria": "Choisir la langue"
+}

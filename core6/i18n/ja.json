@@ -1,0 +1,22 @@
+{
+  "brand.sub": "オフライン辞書・6言語・ひとつの辞書データ",
+  "ui.language": "UI",
+  "api.mode": "Lingua Mundi API",
+  "search.aria": "辞書を検索",
+  "search.placeholder": "辞書を検索…",
+  "search.hint": "入力して検索 — ↑/↓で移動、Enterで開く、Escで閉じる。",
+  "detail.empty": "言語を選んで、検索するか単語をタップしてください。",
+  "senses.title": "意味",
+  "tier.free": "無料版：同梱辞書（{n}語）",
+  "tier.plus": "Plus：UD文法レイヤー完全版（デモではロック中）",
+  "footer.note": "デモ版：同梱JSONが言語別SQLiteの代わりです。Plus版（UD文法レイヤー完全版）はシミュレートされ、ロックされています。",
+  "plus.locked": "🔒 Plus — UD文法レイヤー（デモではロック中）",
+  "plus.title": "Plus版コンテンツ（シミュレート）",
+  "plus.body1": "この項目は無料版に含まれないUD文法データを持っています：{source} の upos {upos}",
+  "plus.body2": "Free（生涯29ドル）は基本辞書を提供します。Plus（月9ドル）はlookupUd()によるUD文法辞書レイヤー全体を解除します — このデモではロック中。",
+  "api.lookup": "Lingua Mundi APIで検索",
+  "api.none": "Lingua Mundi APIに結果がありません。",
+  "api.error": "Lingua Mundi APIに接続できません（{base}）。起動を確認するか、APIモードをオフにしてください。",
+  "typeahead.aria": "検索結果",
+  "tabs.aria": "言語を選択"
+}

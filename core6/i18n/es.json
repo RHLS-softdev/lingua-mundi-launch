@@ -1,0 +1,22 @@
+{
+  "brand.sub": "Diccionario sin conexión · seis idiomas · un léxico",
+  "ui.language": "Idioma",
+  "api.mode": "API Lingua Mundi",
+  "search.aria": "Buscar en el léxico",
+  "search.placeholder": "Buscar en el léxico…",
+  "search.hint": "Escribe para buscar — ↑/↓ para moverte, Intro para abrir, Esc para cerrar.",
+  "detail.empty": "Elige un idioma y luego busca o toca una palabra.",
+  "senses.title": "Acepciones",
+  "tier.free": "Nivel gratuito: léxico incluido ({n} palabras)",
+  "tier.plus": "Plus: capa gramatical UD completa (bloqueada en la demo)",
+  "footer.note": "Versión demo: el JSON incluido sustituye al SQLite por idioma. El nivel Plus (capa gramatical UD completa) está simulado y bloqueado.",
+  "plus.locked": "🔒 Plus — capa gramatical UD (bloqueada en la demo)",
+  "plus.title": "Contenido del nivel Plus (simulado)",
+  "plus.body1": "Esta entrada contiene datos gramaticales UD que el nivel gratuito no incluye: upos {upos} de {source}",
+  "plus.body2": "Free (29 $ de por vida) incluye los diccionarios esenciales. Plus (9 $/mes) desbloquea la capa gramatical-lexical UD completa mediante lookupUd() — bloqueado en esta demo.",
+  "api.lookup": "Buscar en la API de Lingua Mundi",
+  "api.none": "La API de Lingua Mundi no devolvió resultados.",
+  "api.error": "La API de Lingua Mundi no está disponible ({base}). Compruébala o desactiva el modo API.",
+  "typeahead.aria": "Resultados de búsqueda",
+  "tabs.aria": "Elige idioma"
+}

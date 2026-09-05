@@ -1,0 +1,29 @@
+{
+  "brand.sub": "Offline dictionary · six languages · one lexicon",
+  "ui.language": "UI",
+  "api.mode": "Lingua Mundi API",
+  "search.aria": "Search the lexicon",
+  "search.placeholder": "Search the lexicon…",
+  "search.hint": "Type to search — ↑/↓ to move, Enter to open, Esc to close.",
+  "detail.empty": "Pick a language, then search or tap a word.",
+  "senses.title": "Senses",
+  "tier.free": "Free tier: bundled lexicon ({n} words)",
+  "tier.plus": "Plus: full UD grammar layer (locked in demo)",
+  "footer.note": "Demo build: bundled JSON stands in for the per-language sql.js SQLite. The Plus tier (full UD grammar layer) is simulated and locked.",
+  "plus.locked": "🔒 Plus — UD grammar layer (locked in demo)",
+  "plus.title": "Plus tier content (simulated)",
+  "plus.body1": "This entry carries UD grammar data that the Free tier does not include: upos {upos} from {source}",
+  "plus.body2": "Free ($29 lifetime) ships the Essential dictionaries. Plus ($9/mo) unlocks the full UD grammar-lexicon layer via lookupUd() — locked in this demo.",
+  "api.lookup": "Search Lingua Mundi API",
+  "api.none": "No result from the Lingua Mundi API.",
+  "api.error": "Lingua Mundi API unreachable ({base}). Check that it is running, or disable API mode.",
+  "typeahead.aria": "Search results",
+  "tabs.aria": "Choose language",
+  "_meta": {
+    "locale": "ko",
+    "localized_keys": 0,
+    "source": "llama-local qwen2.5-1.5b (zero-API workaround, 2026-09-01)",
+    "note": "machine base — curated quality pass pending (handoff-20260901-morecomp-build-next)",
+    "placeholders_preserved": true
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "language": "en",
+  "entries": [
+    {
+      "lemma": "cat",
+      "part_of_speech": "noun",
+      "senses": [
+        "A small domesticated carnivorous mammal (Felis catus) kept as a pet or kept for catching mice.",
+        "Any member of the family Felidae, such as the lion or tiger."
+      ],
+      "example": { "text": "The cat slept all afternoon on the warm windowsill.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "dog",
+      "part_of_speech": "noun",
+      "senses": [
+        "A domesticated carnivorous mammal (Canis familiaris) with a long snout, an acute sense of smell, and a barking voice.",
+        "A person regarded as unpleasant or contemptible (informal)."
+      ],
+      "example": { "text": "The dog fetched the ball from the garden.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "eat",
+      "part_of_speech": "verb",
+      "senses": [
+        "To put (food) in the mouth, chew, and swallow it.",
+        "To consume or use up (resources, time)."
+      ],
+      "example": { "text": "We eat dinner at seven every evening.", "translation": null },
+      "source": ["WordNet", "UniMorph"],
+      "plus": {
+        "ud_upos": "VERB",
+        "inflection_source": "UniMorph",
+        "features": ["V;PRS;3SG", "V;PST", "V;PTCP;PRS"]
+      }
+    },
+    {
+      "lemma": "water",
+      "part_of_speech": "noun",
+      "senses": [
+        "A colorless, transparent, odorless liquid that forms the seas, lakes, rivers, and rain and is the basis of the fluids of living organisms.",
+        "A stretch or area of water, such as a river, sea, or lake."
+      ],
+      "example": { "text": "A glass of cold water is on the table.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "Japan",
+      "part_of_speech": "proper noun",
+      "senses": [
+        "An island country in East Asia, in the Pacific Ocean, comprising four main islands and thousands of smaller ones."
+      ],
+      "example": { "text": "Japan is famous for its temples and bullet trains.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "book",
+      "part_of_speech": "noun",
+      "senses": [
+        "A written or printed work consisting of pages bound together, fixed in a cover.",
+        "A set of records or accounts."
+      ],
+      "example": { "text": "She read the book in one sitting.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "run",
+      "part_of_speech": "verb",
+      "senses": [
+        "To move at a speed faster than a walk, never having both feet on the ground at the same time.",
+        "To operate or cause (a machine, program, or organization) to function."
+      ],
+      "example": { "text": "They run in the park every morning.", "translation": null },
+      "source": ["WordNet", "UniMorph"],
+      "plus": {
+        "ud_upos": "VERB",
+        "inflection_source": "UniMorph",
+        "features": ["V;PRS;3SG", "V;PST", "V;PTCP;PST"]
+      }
+    },
+    {
+      "lemma": "house",
+      "part_of_speech": "noun",
+      "senses": [
+        "A building for human habitation, especially one that is lived in by a family or small group.",
+        "A building in which people meet for a particular activity."
+      ],
+      "example": { "text": "Their house has a red roof and a white fence.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "sun",
+      "part_of_speech": "noun",
+      "senses": [
+        "The star around which the earth orbits; the source of light and heat on earth.",
+        "The light or warmth of the sun."
+      ],
+      "example": { "text": "The sun rose over the mountains at dawn.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "friend",
+      "part_of_speech": "noun",
+      "senses": [
+        "A person whom one knows and with whom one has a bond of mutual affection.",
+        "A person who supports a cause or organization."
+      ],
+      "example": { "text": "An old friend called me yesterday.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "city",
+      "part_of_speech": "noun",
+      "senses": [
+        "A large town, typically with a cathedral and a seat of local government.",
+        "The people of a city considered collectively."
+      ],
+      "example": { "text": "The city never sleeps.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "big",
+      "part_of_speech": "adjective",
+      "senses": [
+        "Of considerable size, extent, or intensity.",
+        "Of considerable importance or seriousness."
+      ],
+      "example": { "text": "That is a big tree.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "school",
+      "part_of_speech": "noun",
+      "senses": [
+        "An institution for educating children.",
+        "Any institution at which instruction is given in a particular discipline."
+      ],
+      "example": { "text": "The children walk to school together.", "translation": null },
+      "source": ["WordNet"],
+      "plus": null
+    }
+  ]
+}

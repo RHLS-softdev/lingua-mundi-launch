@@ -1,0 +1,153 @@
+{
+  "language": "fr",
+  "entries": [
+    {
+      "lemma": "chat",
+      "part_of_speech": "nom",
+      "senses": [
+        "Mammifère carnivore domestique (Felis catus), à tête ronde, moustaches longues et griffes rétractiles.",
+        "Félin sauvage, tel que le lion ou le tigre."
+      ],
+      "example": { "text": "Le chat dort sur le canapé.", "translation": "The cat sleeps on the sofa." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "manger",
+      "part_of_speech": "verbe",
+      "senses": [
+        "Porter de la nourriture à la bouche, la mâcher et l'avaler.",
+        "Consommer, dépenser (des ressources)."
+      ],
+      "example": { "text": "Nous mangeons ensemble tous les dimanches.", "translation": "We eat together every Sunday." },
+      "source": ["WordNet", "UniMorph"],
+      "plus": {
+        "ud_upos": "VERB",
+        "inflection_source": "UniMorph",
+        "features": ["V;PRS;1SG", "V;PST;3SG", "V;PTCP;PST"]
+      }
+    },
+    {
+      "lemma": "eau",
+      "part_of_speech": "nom",
+      "senses": [
+        "Substance liquide, transparente et inodore, essentielle à la vie, qui forme les mers, les rivières et les lacs."
+      ],
+      "example": { "text": "Un verre d'eau froide est sur la table.", "translation": "A glass of cold water is on the table." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "chien",
+      "part_of_speech": "nom",
+      "senses": [
+        "Mammifère domestique (Canis familiaris) au museau allongé et à l'odorat très développé.",
+        "Personne jugée méprisable (familier)."
+      ],
+      "example": { "text": "Le chien court dans le parc.", "translation": "The dog runs in the park." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "maison",
+      "part_of_speech": "nom",
+      "senses": [
+        "Bâtiment destiné à l'habitation d'une personne ou d'une famille.",
+        "Foyer, lieu où l'on vit."
+      ],
+      "example": { "text": "Leur maison a un toit rouge.", "translation": "Their house has a red roof." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "soleil",
+      "part_of_speech": "nom",
+      "senses": [
+        "Étoile autour de laquelle tourne la Terre ; source de lumière et de chaleur.",
+        "Lumière ou chaleur du soleil."
+      ],
+      "example": { "text": "Le soleil se lève à l'est.", "translation": "The sun rises in the east." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "ami",
+      "part_of_speech": "nom",
+      "senses": [
+        "Personne avec laquelle on a des liens d'affection et de confiance.",
+        "Personne qui soutient une cause."
+      ],
+      "example": { "text": "Un ami d'enfance m'a appelé.", "translation": "A childhood friend called me." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "ville",
+      "part_of_speech": "nom",
+      "senses": [
+        "Agglomération urbaine importante, où vit une grande population et qui offre des services."
+      ],
+      "example": { "text": "La ville est pleine de lumières la nuit.", "translation": "The city is full of lights at night." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "livre",
+      "part_of_speech": "nom",
+      "senses": [
+        "Ensemble de feuilles imprimées, reliées et protégées par une couverture.",
+        "Œuvre littéraire ou scientifique."
+      ],
+      "example": { "text": "J'ai lu le livre en une soirée.", "translation": "I read the book in one evening." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "courir",
+      "part_of_speech": "verbe",
+      "senses": [
+        "Se déplacer rapidement en avançant les jambes avec vitesse.",
+        "Faire fonctionner (une machine, un programme)."
+      ],
+      "example": { "text": "Nous courons sur la plage à l'aube.", "translation": "We run on the beach at dawn." },
+      "source": ["WordNet", "UniMorph"],
+      "plus": {
+        "ud_upos": "VERB",
+        "inflection_source": "UniMorph",
+        "features": ["V;PRS;1PL", "V;PST;1SG", "V;PTCP;PRS"]
+      }
+    },
+    {
+      "lemma": "grand",
+      "part_of_speech": "adjectif",
+      "senses": [
+        "De taille, d'étendue ou d'intensité considérables.",
+        "De grande importance ou envergure."
+      ],
+      "example": { "text": "C'est un grand arbre.", "translation": "That is a big tree." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "école",
+      "part_of_speech": "nom",
+      "senses": [
+        "Institution où l'on dispense un enseignement, notamment primaire.",
+        "Ensemble des disciples d'un maître ou des adeptes d'une doctrine."
+      ],
+      "example": { "text": "Les enfants vont à l'école à pied.", "translation": "The children walk to school." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "Japon",
+      "part_of_speech": "nom propre",
+      "senses": [
+        "Pays insulaire d'Asie de l'Est, dans l'océan Pacifique, formé de quatre îles principales."
+      ],
+      "example": { "text": "Le Japon est célèbre pour ses temples et ses trains à grande vitesse.", "translation": "Japan is famous for its temples and bullet trains." },
+      "source": ["WordNet"],
+      "plus": null
+    }
+  ]
+}

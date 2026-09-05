@@ -1,0 +1,153 @@
+{
+  "language": "es",
+  "entries": [
+    {
+      "lemma": "gato",
+      "part_of_speech": "sustantivo",
+      "senses": [
+        "Mamífero carnívoro doméstico (Felis catus), de cabeza redonda, bigotes largos y uñas retráctiles.",
+        "Gato montés o felino salvaje."
+      ],
+      "example": { "text": "El gato duerme en el sofá.", "translation": "The cat sleeps on the sofa." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "comer",
+      "part_of_speech": "verbo",
+      "senses": [
+        "Tomar alimento por la boca, masticarlo y tragarlo.",
+        "Consumir, gastar (recursos)."
+      ],
+      "example": { "text": "Comemos juntos todos los domingos.", "translation": "We eat together every Sunday." },
+      "source": ["WordNet", "UniMorph"],
+      "plus": {
+        "ud_upos": "VERB",
+        "inflection_source": "UniMorph",
+        "features": ["V;PRS;1SG", "V;PST;3SG", "V;PTCP;PST"]
+      }
+    },
+    {
+      "lemma": "agua",
+      "part_of_speech": "sustantivo",
+      "senses": [
+        "Sustancia líquida, transparente e inodora, esencial para la vida, que forma los mares, ríos y lagos."
+      ],
+      "example": { "text": "Bebe un vaso de agua fría.", "translation": "Drink a glass of cold water." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "perro",
+      "part_of_speech": "sustantivo",
+      "senses": [
+        "Mamífero doméstico (Canis familiaris) de hocico alargado y olfato muy desarrollado.",
+        "Persona considerada despreciable (coloquial)."
+      ],
+      "example": { "text": "El perro corre por el parque.", "translation": "The dog runs through the park." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "casa",
+      "part_of_speech": "sustantivo",
+      "senses": [
+        "Edificio destinado a vivienda de una persona o familia.",
+        "Hogar, lugar donde se vive."
+      ],
+      "example": { "text": "Mi casa tiene un jardín pequeño.", "translation": "My house has a small garden." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "sol",
+      "part_of_speech": "sustantivo",
+      "senses": [
+        "Estrella alrededor de la cual gira la Tierra; fuente de luz y calor.",
+        "Luz o calor del sol."
+      ],
+      "example": { "text": "El sol sale por el este.", "translation": "The sun rises in the east." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "amigo",
+      "part_of_speech": "sustantivo",
+      "senses": [
+        "Persona con la que se tiene una relación de afecto y confianza.",
+        "Persona que apoya una causa."
+      ],
+      "example": { "text": "Un amigo de la infancia me llamó.", "translation": "A childhood friend called me." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "ciudad",
+      "part_of_speech": "sustantivo",
+      "senses": [
+        "Núcleo urbano grande, con edificios, comercios y servicios, donde vive mucha gente."
+      ],
+      "example": { "text": "La ciudad está llena de luces de noche.", "translation": "The city is full of lights at night." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "libro",
+      "part_of_speech": "sustantivo",
+      "senses": [
+        "Conjunto de hojas impresas unidas por un lado y protegidas por cubiertas.",
+        "Obra literaria o científica."
+      ],
+      "example": { "text": "Leí el libro en una tarde.", "translation": "I read the book in one afternoon." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "correr",
+      "part_of_speech": "verbo",
+      "senses": [
+        "Desplazarse con rapidez, moviendo las piernas con velocidad.",
+        "Hacer funcionar (una máquina, un programa)."
+      ],
+      "example": { "text": "Corremos por la playa al amanecer.", "translation": "We run on the beach at dawn." },
+      "source": ["WordNet", "UniMorph"],
+      "plus": {
+        "ud_upos": "VERB",
+        "inflection_source": "UniMorph",
+        "features": ["V;PRS;1PL", "V;PST;1SG", "V;PTCP;PRS"]
+      }
+    },
+    {
+      "lemma": "grande",
+      "part_of_speech": "adjetivo",
+      "senses": [
+        "De tamaño, extensión o intensidad considerables.",
+        "De gran importancia o magnitud."
+      ],
+      "example": { "text": "Ese es un árbol grande.", "translation": "That is a big tree." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "escuela",
+      "part_of_speech": "sustantivo",
+      "senses": [
+        "Institución dedicada a la enseñanza, especialmente la primaria.",
+        "Conjunto de discípulos de un maestro o de seguidores de una doctrina."
+      ],
+      "example": { "text": "Los niños van a la escuela caminando.", "translation": "The children walk to school." },
+      "source": ["WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "Japón",
+      "part_of_speech": "nombre propio",
+      "senses": [
+        "País insular de Asia oriental, en el océano Pacífico, formado por cuatro islas principales."
+      ],
+      "example": { "text": "Japón es conocido por sus templos y trenes bala.", "translation": "Japan is famous for its temples and bullet trains." },
+      "source": ["WordNet"],
+      "plus": null
+    }
+  ]
+}

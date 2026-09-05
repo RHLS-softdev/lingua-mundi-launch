@@ -1,0 +1,29 @@
+{
+  "brand.sub": "品牌",
+  "ui.language": "UI",
+  "api.mode": "Lingua Mundi API",
+  "search.aria": "搜索词典",
+  "search.placeholder": "搜索词典...",
+  "search.hint": "输入以搜索 — ↑/↓移动，Enter打开，Esc关闭。",
+  "detail.empty": "选择语言，然后搜索或点击词",
+  "senses.title": "含义",
+  "tier.free": "免费版：词典包 ({n} 词)",
+  "tier.plus": "付费版：全 UD 语法规则层（锁定演示版）",
+  "footer.note": "演示版：词典包（JSON 竖立）代替每种语言的 SQL.js SQLite。付费版（全 UD 语法规则层）（模拟）锁定。",
+  "plus.locked": "🔒 付费版 — 语法规则层（锁定演示版）",
+  "plus.title": "付费版内容（模拟）",
+  "plus.body1": "本条目包含付费版未包含的 UD 语法规则数据：upos {upos} 从 {source}",
+  "plus.body2": "免费（29 月）：包含基础词典。付费（9 月）：解锁全 UD 语法规则层（通过 lookupUd() 查找）——锁定演示版。",
+  "api.lookup": "搜索 Lingua Mundi API",
+  "api.none": "Lingua Mundi API 搜索结果为空",
+  "api.error": "Lingua Mundi API 无法连接 ({base})。检查它是否运行，或禁用 API 模式。",
+  "typeahead.aria": "搜索结果",
+  "tabs.aria": "Choose language",
+  "_meta": {
+    "locale": "yue",
+    "localized_keys": 19,
+    "source": "llama-local qwen2.5-1.5b (zero-API workaround, 2026-09-01)",
+    "note": "machine base — curated quality pass pending (handoff-20260901-morecomp-build-next)",
+    "placeholders_preserved": true
+  }
+}

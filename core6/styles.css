@@ -1,0 +1,460 @@
+/* Core 6 — offline dictionary
+ * Brand palette: #004070 (deep blue) / #0060a0 (mid blue) / #101418 (ink) / #f5f6f8 (paper)
+ * Solid colors only — no gradients. Mobile-first. */
+
+:root {
+  --deep: #004070;
+  --mid: #0060a0;
+  --ink: #101418;
+  --paper: #f5f6f8;
+  --white: #ffffff;
+  --line: #d7dde3;
+  --muted: #5b6672;
+  --plus: #9a4a00;
+  --plus-bg: #fff1e0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+  overflow-x: hidden;
+}
+
+.app {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- header ---------- */
+
+.app-header {
+  background: var(--deep);
+  color: var(--paper);
+  margin: 0 -1rem 1rem;
+  padding: 1.25rem 1rem;
+}
+
+.brand-name {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+}
+
+.brand-sub {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: #bcd4e8;
+}
+
+/* ---------- language tabs ---------- */
+
+.lang-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.lang-tab {
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--deep);
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lang-tab[aria-selected="true"] {
+  background: var(--mid);
+  border-color: var(--mid);
+  color: var(--white);
+}
+
+.lang-tab:focus-visible {
+  outline: 2px solid var(--mid);
+  outline-offset: 2px;
+}
+
+/* ---------- search + typeahead ---------- */
+
+.search {
+  margin-bottom: 1rem;
+}
+
+.search-wrap {
+  position: relative;
+}
+
+#searchInput {
+  width: 100%;
+  max-width: 100%;
+  font: inherit;
+  font-size: 1.05rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 0.375rem;
+  background: var(--white);
+  color: var(--ink);
+}
+
+#searchInput:focus {
+  outline: none;
+  border-color: var(--mid);
+  box-shadow: 0 0 0 3px rgba(0, 96, 160, 0.18);
+}
+
+.typeahead {
+  position: absolute;
+  top: calc(100% + 0.3rem);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0.25rem 0;
+  list-style: none;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0.375rem;
+  box-shadow: 0 6px 18px rgba(16, 20, 24, 0.14);
+  max-height: 16rem;
+  overflow-y: auto;
+  z-index: 20;
+}
+
+.typeahead li {
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.typeahead li[aria-selected="true"],
+.typeahead li:hover {
+  background: var(--mid);
+  color: var(--white);
+}
+
+.typeahead .th-lemma {
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.typeahead .th-furi {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.typeahead li[aria-selected="true"] .th-furi,
+.typeahead li:hover .th-furi {
+  color: #cfe4f4;
+}
+
+.typeahead .th-pos {
+  margin-left: auto;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.typeahead li[aria-selected="true"] .th-pos,
+.typeahead li:hover .th-pos {
+  color: #e8f1f8;
+}
+
+.typeahead .th-empty {
+  color: var(--muted);
+  cursor: default;
+}
+
+.search-hint {
+  margin: 0.45rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ---------- word detail ---------- */
+
+.detail {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.detail-empty {
+  margin: 0;
+  color: var(--muted);
+}
+
+.word-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.word-lemma {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.25;
+  font-family: "Hiragino Mincho ProN", "Hiragino Mincho",
+    "Noto Serif JP", "Yu Mincho", "YuMincho", serif;
+  word-break: break-word;
+}
+
+.word-lemma ruby rt {
+  font-size: 0.5em;
+  font-weight: 400;
+  color: var(--mid);
+}
+
+.word-pos {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  flex-shrink: 0;
+}
+
+.word-lang {
+  font-size: 0.75rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.senses-title {
+  margin: 0.9rem 0 0.35rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.senses {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.senses li {
+  margin-bottom: 0.4rem;
+}
+
+.example {
+  margin: 0.9rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-left: 3px solid var(--mid);
+  background: var(--paper);
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+
+.example .ex-text {
+  font-style: italic;
+  margin: 0;
+}
+
+.example .ex-trans {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------- source badges ---------- */
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+
+.badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 0.25rem;
+  background: var(--deep);
+  color: var(--white);
+}
+
+.badge.wordnet {
+  background: var(--mid);
+}
+
+.badge.junimorph {
+  background: #4a6a2a;
+}
+
+.badge.ud {
+  background: #6b3fa0;
+}
+
+/* ---------- Plus (UD grammar layer) ---------- */
+
+.plus-lock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.9rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--plus);
+  background: var(--plus-bg);
+  color: var(--plus);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+}
+
+.plus-block {
+  margin: 0.6rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border: 1px dashed var(--plus);
+  border-radius: 0.375rem;
+  background: var(--plus-bg);
+  color: var(--plus);
+  font-size: 0.85rem;
+}
+
+.plus-block .pb-title {
+  margin: 0 0 0.3rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.plus-block code {
+  font-size: 0.8rem;
+  background: rgba(154, 74, 0, 0.1);
+  padding: 0.05rem 0.3rem;
+  border-radius: 0.2rem;
+}
+
+/* ---------- tier status footer ---------- */
+
+.tier {
+  margin-top: 1.25rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+
+.tier-status {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+
+.tier-status .tier-free {
+  color: var(--deep);
+  font-weight: 600;
+}
+
+.tier-status .tier-plus {
+  color: var(--plus);
+  font-weight: 600;
+}
+
+.tier-note {
+  margin: 0.35rem 0 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* ---------- responsive ---------- */
+
+@media (min-width: 769px) {
+  .content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .word-lemma {
+    font-size: 2.4rem;
+  }
+
+  .app-header {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 0 0.75rem 1.5rem;
+  }
+
+  .app-header {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+  }
+
+  .word-lemma {
+    font-size: 1.8rem;
+  }
+
+  .detail {
+    padding: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-name {
+    font-size: 1.35rem;
+  }
+
+  .lang-tab {
+    font-size: 0.88rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  #searchInput {
+    font-size: 1rem;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .word-lemma {
+    font-size: 1.55rem;
+  }
+
+  .senses {
+    padding-left: 1.05rem;
+  }
+}

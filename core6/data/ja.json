@@ -1,0 +1,165 @@
+{
+  "language": "ja",
+  "entries": [
+    {
+      "lemma": "猫",
+      "furigana": "ねこ",
+      "part_of_speech": "名詞",
+      "senses": [
+        "ネコ科の哺乳類。小型で人になつく家畜種 (Felis catus)。",
+        "ネコ科 (Felidae) の動物一般。"
+      ],
+      "example": { "text": "猫が窓辺で昼寝をしている。", "translation": "A cat is taking a nap by the window." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "食べる",
+      "furigana": "たべる",
+      "part_of_speech": "動詞",
+      "senses": [
+        "食物を口に入れ、かんで飲み込む。",
+        "（時間や資源を）消費する。"
+      ],
+      "example": { "text": "毎晩七時に夕食を食べる。", "translation": "We eat dinner at seven every evening." },
+      "source": ["JMdict", "WordNet", "J-UniMorph"],
+      "plus": {
+        "ud_upos": "VERB",
+        "inflection_source": "J-UniMorph",
+        "features": ["V;PST", "V;PRS", "V;NEG", "V;COND"]
+      }
+    },
+    {
+      "lemma": "水",
+      "furigana": "みず",
+      "part_of_speech": "名詞",
+      "senses": [
+        "無色透明の液体。海・川・湖をなし、生物の体液の基礎となるもの。",
+        "冷水・飲料水。"
+      ],
+      "example": { "text": "冷たい水を一杯ください。", "translation": "Please give me a glass of cold water." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "日本",
+      "furigana": "にほん",
+      "part_of_speech": "固有名詞",
+      "senses": [
+        "東アジアの太平洋にある島国。主要四島と多数の小島からなる。"
+      ],
+      "example": { "text": "日本は寺と新幹線で有名だ。", "translation": "Japan is famous for its temples and bullet trains." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "犬",
+      "furigana": "いぬ",
+      "part_of_speech": "名詞",
+      "senses": [
+        "イヌ科の哺乳類。人に飼われ、嗅覚が鋭く、吠える (Canis familiaris)。"
+      ],
+      "example": { "text": "犬が庭でボールを追いかける。", "translation": "The dog chases the ball in the garden." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "本",
+      "furigana": "ほん",
+      "part_of_speech": "名詞",
+      "senses": [
+        "紙を綴じ、表紙をつけた書物。",
+        "読み物・著作物。"
+      ],
+      "example": { "text": "その本を一晩で読んだ。", "translation": "I read that book in one night." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "走る",
+      "furigana": "はしる",
+      "part_of_speech": "動詞",
+      "senses": [
+        "両足が同時に地面から離れる速さで移動する。",
+        "（道や線が）ある方向へ続く。"
+      ],
+      "example": { "text": "毎朝公園を走る。", "translation": "I run in the park every morning." },
+      "source": ["JMdict", "WordNet", "J-UniMorph"],
+      "plus": {
+        "ud_upos": "VERB",
+        "inflection_source": "J-UniMorph",
+        "features": ["V;PST", "V;PRS", "V;NEG", "V;COND"]
+      }
+    },
+    {
+      "lemma": "家",
+      "furigana": "いえ",
+      "part_of_speech": "名詞",
+      "senses": [
+        "人が住むための建物。",
+        "家庭・世帯。"
+      ],
+      "example": { "text": "家の屋根は赤い。", "translation": "The roof of the house is red." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "太陽",
+      "furigana": "たいよう",
+      "part_of_speech": "名詞",
+      "senses": [
+        "地球が公転する恒星。光と熱の源。",
+        "日光・日差し。"
+      ],
+      "example": { "text": "太陽が東の山から昇る。", "translation": "The sun rises over the eastern mountains." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "友達",
+      "furigana": "ともだち",
+      "part_of_speech": "名詞",
+      "senses": [
+        "親しく交際している人。友人。"
+      ],
+      "example": { "text": "幼なじみの友達から電話があった。", "translation": "A childhood friend called me." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "大きい",
+      "furigana": "おおきい",
+      "part_of_speech": "形容詞",
+      "senses": [
+        "規模・面積・程度が際立っているさま。",
+        "重要な・重大なさま。"
+      ],
+      "example": { "text": "あの木は大きい。", "translation": "That tree is big." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "学校",
+      "furigana": "がっこう",
+      "part_of_speech": "名詞",
+      "senses": [
+        "児童・生徒・学生に教育を行う機関。",
+        "ある分野の教育・研究を行う施設。"
+      ],
+      "example": { "text": "子供たちは一緒に学校へ歩いていく。", "translation": "The children walk to school together." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    },
+    {
+      "lemma": "東京",
+      "furigana": "とうきょう",
+      "part_of_speech": "固有名詞",
+      "senses": [
+        "日本の首都。本州の関東地方に位置する世界有数の大都市圏。"
+      ],
+      "example": { "text": "東京は夜も明るい。", "translation": "Tokyo is bright even at night." },
+      "source": ["JMdict", "WordNet"],
+      "plus": null
+    }
+  ]
+}

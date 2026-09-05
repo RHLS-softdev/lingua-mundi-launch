@@ -1,0 +1,22 @@
+{
+  "brand.sub": "Dicionário offline · seis idiomas · um léxico",
+  "ui.language": "Idioma",
+  "api.mode": "API Lingua Mundi",
+  "search.aria": "Pesquisar no léxico",
+  "search.placeholder": "Pesquisar no léxico…",
+  "search.hint": "Digite para pesquisar — ↑/↓ para mover, Enter para abrir, Esc para fechar.",
+  "detail.empty": "Escolha um idioma e depois pesquise ou toque numa palavra.",
+  "senses.title": "Aceções",
+  "tier.free": "Nível gratuito: léxico incluído ({n} palavras)",
+  "tier.plus": "Plus: camada gramatical UD completa (bloqueada na demo)",
+  "footer.note": "Versão demo: o JSON incluído substitui o SQLite por idioma. O nível Plus (camada gramatical UD completa) é simulado e bloqueado.",
+  "plus.locked": "🔒 Plus — camada gramatical UD (bloqueada na demo)",
+  "plus.title": "Conteúdo do nível Plus (simulado)",
+  "plus.body1": "Esta entrada contém dados gramaticais UD que o nível gratuito não inclui: upos {upos} de {source}",
+  "plus.body2": "Free (29 $ vitalícios) inclui os dicionários essenciais. Plus (9 $/mês) desbloqueia toda a camada UD via lookupUd() — bloqueado nesta demo.",
+  "api.lookup": "Pesquisar na API Lingua Mundi",
+  "api.none": "Sem resultados da API Lingua Mundi.",
+  "api.error": "API Lingua Mundi inacessível ({base}). Verifique se está ativa ou desative o modo API.",
+  "typeahead.aria": "Resultados da pesquisa",
+  "tabs.aria": "Escolher idioma"
+}

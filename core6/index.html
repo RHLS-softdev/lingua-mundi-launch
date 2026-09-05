@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Texupan — a fully offline dictionary for English, Spanish, Japanese, French, Italian and Portuguese, with optional Lingua Mundi API lookups.">
+  <title>Texupan — Offline Dictionary</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+
+    <header class="app-header">
+      <div class="brand">
+        <h1 class="brand-name">Texupan</h1>
+        <p class="brand-sub" data-i18n="brand.sub">Offline dictionary &middot; six languages &middot; one lexicon</p>
+      </div>
+      <div class="header-actions">
+        <label class="ui-lang">
+          <span data-i18n="ui.language">UI</span>
+          <select id="uiLang" aria-label="Interface language">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="ja">日本語</option>
+            <option value="fr">Français</option>
+            <option value="it">Italiano</option>
+            <option value="pt">Português</option>
+          </select>
+        </label>
+        <label class="api-toggle" title="Lingua Mundi API lookups">
+          <input type="checkbox" id="apiMode" checked>
+          <span data-i18n="api.mode">Lingua Mundi API</span>
+        </label>
+      </div>
+    </header>
+
+    <nav class="lang-tabs" id="langTabs" role="tablist" aria-label="Choose language"></nav>
+
+    <main class="content">
+
+      <section class="search" aria-label="Search the lexicon">
+        <label class="sr-only" for="searchInput" data-i18n="search.aria">Search the lexicon</label>
+        <div class="search-wrap">
+          <input id="searchInput" type="search" data-i18n-placeholder="search.placeholder"
+                 placeholder="Search the lexicon&hellip;"
+                 autocomplete="off" spellcheck="false" autocapitalize="off"
+                 aria-autocomplete="list" aria-controls="typeahead"
+                 aria-label="Search the lexicon">
+          <ul id="typeahead" class="typeahead" role="listbox" aria-label="Search results" hidden></ul>
+        </div>
+        <p class="search-hint" id="searchHint" data-i18n="search.hint">Type to search &mdash; &uarr;/&darr; to move, Enter to open, Esc to close.</p>
+      </section>
+
+      <section class="detail" id="detail" aria-live="polite">
+        <p class="detail-empty" data-i18n="detail.empty">Pick a language, then search or tap a word.</p>
+      </section>
+
+    </main>
+
+    <footer class="tier">
+      <p class="tier-status" id="tierStatus"></p>
+      <p class="tier-note" data-i18n="footer.note">Demo build: bundled JSON stands in for the per-language sql.js SQLite. The Plus tier (full UD grammar layer) is simulated and locked.</p>
+    </footer>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
